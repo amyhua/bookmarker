@@ -1,6 +1,6 @@
 Bookmarker::Application.routes.draw do
-  root :to => "links#index"
-  resources :links
+  root :to => "folders#index"
+  resources :folders
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

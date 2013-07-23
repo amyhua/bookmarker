@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<% flash.each do |key, value| %>
+  <div class='flash' id='<%= key %>'>
+    <%= value %>
+  </div>
+<% end %>
+
+<% unless @folders.nil? %>
+	<% @folders.each do |folder| %>
+		<div class='folders' id='<%= folder %>'>
+			<%= folder.name %>
+		</div>
+	<% end %>
+<% end %>
+
 <%= yield %>
 
 </body>
