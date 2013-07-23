@@ -34,7 +34,11 @@ class FoldersController < ApplicationController
   end
 
   def destroy
+    name = @folder.name
     @folder.destroy
+    @folders = Folder.all
+    flash[:notice] = "Your folder #{name} has been deleted."
+    redirect_to folders_path
   end
 
   def show
