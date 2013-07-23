@@ -1,6 +1,7 @@
 class FoldersController < ApplicationController
+  before_filter :find_folder, :only => [:edit, :update, :destroy, :show]
+  before_filter :all_folders
   def index
-    @folders = Folder.all
   end
   
   def new
@@ -22,11 +23,30 @@ class FoldersController < ApplicationController
   end
 
   def update
+    if @folder.update_attributes(params[:folder])
+      flash[:notice] = "Your folder has been updated."
+      redirect_to folders_path
+    else
+      flash[:alert] = "Your folder has not been updated."
+      render :action => :edit
+    end
+    
   end
 
   def destroy
+    @folder.destroy
   end
 
   def show
+  end
+  
+  private
+  
+  def find_folder
+    @folder = Folder.find(params[:id])
+  end
+  
+  def all_folders
+    @folders = Folder.all
   end
 end

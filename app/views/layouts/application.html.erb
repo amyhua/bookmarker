@@ -17,7 +17,7 @@
 <% unless @folders.nil? %>
 	<% @folders.each do |folder| %>
 		<div class='folders' id='<%= folder %>'>
-			<%= folder.name %>
+			<b><%= link_to folder.name, folder %></b><br />
 		</div>
 	<% end %>
 <% end %>
