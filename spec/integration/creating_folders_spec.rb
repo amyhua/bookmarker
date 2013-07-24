@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 
-feature 'Creating links' do
+feature 'Creating Folders' do
   
   scenario 'can create folder' do
     visit '/'

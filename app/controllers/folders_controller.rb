@@ -1,9 +1,10 @@
 class FoldersController < ApplicationController
+  
   before_filter :find_folder, :only => [:edit, :update, :destroy, :show]
-  before_filter :all_folders
+  before_filter :get_folders
   
   def index
-    @root = Folder.new(:name => "All")
+    @links = Link.all
   end
   
   def new
@@ -58,7 +59,11 @@ class FoldersController < ApplicationController
     @folder = Folder.find(params[:id])
   end
   
-  def all_folders
-    @folders = Folder.all
+  def get_folders
+    if @root.nil?
+      @root = Folder.new(:name => "All", :parentname => "All")
+      @root.save      
+    end
+    @folders = Folder.where("name <> 'All'")
   end
 end

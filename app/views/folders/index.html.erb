@@ -1,1 +1,24 @@
 <%= link_to "New Folder", new_folder_path %>
+
+<!-- Display all links -->
+
+<ul>
+<% unless @links.nil? %>	
+	<% @links.each do |link| %>
+		<li>
+			<div class='links' id='<%= link.title %>'>
+				<%= link_to link.title, link %>
+			<li>
+				<div class='links-notes' id='<%= link.title %>'>
+					<%= link.notes %>
+				</div>
+			</li>
+			<li>
+				<div class ='links-url'>
+					<%= link.url %>
+			</div>				
+			</li>			
+		</li>
+	<% end %>
+<% end %>
+</ul>

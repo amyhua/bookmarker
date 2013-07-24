@@ -1,3 +1,8 @@
 class Link < ActiveRecord::Base
-  attr_accessible :notes, :title, :url
+  belongs_to :folders
+  
+  attr_accessible :notes, :title, :url, :folder
+  validates :title, :presence => true
+  validates :url, :presence => true
+  
 end
