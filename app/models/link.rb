@@ -1,3 +1,3 @@
 class Link < ActiveRecord::Base
-  attr_accessible :folder, :name, :notes, :subfolder, :url
+  attr_accessible :notes, :title, :url
 end

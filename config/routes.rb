@@ -1,4 +1,16 @@
 Bookmarker::Application.routes.draw do
+  get "models/new"
+
+  get "models/create"
+
+  get "models/show"
+
+  get "models/edit"
+
+  get "models/update"
+
+  get "models/destroy"
+
   root :to => "folders#index"
   resources :folders
 

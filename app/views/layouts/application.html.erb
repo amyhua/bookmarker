@@ -7,13 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<h1><%= link_to "Bookmarker", root_path %></h1>
 <% flash.each do |key, value| %>
   <div class='flash' id='<%= key %>'>
     <%= value %>
   </div>
 <% end %>
 
+<h2><%= link_to "Folders", root_path %></h2>
 <% unless @folders.nil? %>
 	<% @folders.each do |folder| %>
 		<div class='folders' id='<%= folder %>'>
@@ -21,6 +22,9 @@
 		</div>
 	<% end %>
 <% end %>
+
+<br />
+<br />
 
 <%= yield %>
 

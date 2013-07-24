@@ -1,11 +1,17 @@
 class FoldersController < ApplicationController
   before_filter :find_folder, :only => [:edit, :update, :destroy, :show]
   before_filter :all_folders
+  
   def index
+    @root = Folder.new(:name => "All")
   end
   
   def new
-    @folder = Folder.new
+    if params[:parentname].nil?
+      @folder = Folder.new(:parentname => "All")
+    else
+      @folder = Folder.new(:parentname => params[:parentname])
+    end
   end
 
   def create
@@ -40,12 +46,14 @@ class FoldersController < ApplicationController
     flash[:notice] = "Your folder #{name} has been deleted."
     redirect_to folders_path
   end
+  
 
   def show
+    
   end
   
   private
-  
+ 
   def find_folder
     @folder = Folder.find(params[:id])
   end

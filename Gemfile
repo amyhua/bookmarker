@@ -27,6 +27,7 @@ gem 'jquery-rails'
 group :test, :development do
   gem 'rspec-rails', '~> 2.11'
   gem 'launchy'
+  gem 'pry-debugger'
 end
 
 group :test do
