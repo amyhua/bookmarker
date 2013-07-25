@@ -1,24 +1,29 @@
-<%= link_to "New Folder", new_folder_path %>
 
 <!-- Display all links -->
 
 <ul>
 <% unless @links.nil? %>	
 	<% @links.each do |link| %>
-		<li>
-			<div class='links' id='<%= link.title %>'>
-				<%= link_to link.title, link %>
-			<li>
-				<div class='links-notes' id='<%= link.title %>'>
-					<%= link.notes %>
-				</div>
-			</li>
-			<li>
-				<div class ='links-url'>
-					<%= link.url %>
-			</div>				
-			</li>			
-		</li>
+			<h3><div class='links' id='<%= link.title %>'>
+				<a href="<%= link.url.to_s %>"><%= link.title %></a></h3>
+				<ul>
+
+					<li>
+						<div class ='links-url'>
+							<%= link.url %>
+					</div>				
+					</li>								
+
+					<% unless link.notes.empty? %>
+					<li>
+						<div class='links-notes' id='<%= link.title %>'>
+							<%= link.notes %>
+						</div>
+					</li>
+					<% end %>
+					<br />				
+					Filed under <%= Folder.find(link.folder_id).name %> | <%= link_to "Edit", [:edit, Folder.find(link.folder_id), link] %> | <%= link_to "Delete", :method => :delete, :confirm => "Are you sure you want to delete this link?" %>	
+				</ul>
 	<% end %>
 <% end %>
 </ul>

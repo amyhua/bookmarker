@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724205657) do
+ActiveRecord::Schema.define(:version => 20130724235517) do
 
   create_table "folders", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130724205657) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "folder_id"
+    t.integer  "timestamp"
   end
 
   add_index "links", ["folder_id"], :name => "index_links_on_folder_id"

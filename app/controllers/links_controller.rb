@@ -12,6 +12,11 @@ class LinksController < ApplicationController
 
   def create
     @link = @folder.links.build(params[:link])
+    @link.timestamp = Time.now.to_i
+    unless @link.url.include? "http://"
+      url = 'http://' + @link.url
+      @link.url = url
+    end
     if @link.save
       title = @link.title
       flash[:notice] = "Your link #{title} has been created."
@@ -22,13 +27,18 @@ class LinksController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def edit
   end
 
   def update
+    @link.timestamp = Time.now.to_i
+    if @link.update_attributes(params[:link])
+      flash[:notice] = "Your link has been updated."
+      redirect_to folders_path
+    else
+      flash[:alert] = "Your link has not been updated."
+      render :action => :edit
+    end 
   end
 
   def destroy
@@ -41,6 +51,11 @@ class LinksController < ApplicationController
   end
     
   def find_link
-    @link = @folders.links.find(params[:id])
+    @link = @folder.links.find(params[:id])
+  end
+  
+  def find_folder_links
+    @links = @folder.links
+    @links.sort! { |a,b| a.title.downcase <=> b.title.downcase }
   end
 end

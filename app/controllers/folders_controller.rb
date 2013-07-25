@@ -2,9 +2,9 @@ class FoldersController < ApplicationController
   
   before_filter :find_folder, :only => [:edit, :update, :destroy, :show]
   before_filter :get_folders
+  before_filter :get_all_sorted_links, :only => [:index]
   
   def index
-    @links = Link.all
   end
   
   def new
@@ -43,14 +43,14 @@ class FoldersController < ApplicationController
   def destroy
     name = @folder.name
     @folder.destroy
-    @folders = Folder.all
+    @folders = Folder.all.sort! { |a,b| a.name.downcase <=> b.name.downcase }
     flash[:notice] = "Your folder #{name} has been deleted."
     redirect_to folders_path
   end
   
 
   def show
-    
+    @links = @folder.links.sort! { |a,b| b.timestamp <=> a.timestamp }
   end
   
   private
@@ -65,5 +65,18 @@ class FoldersController < ApplicationController
       @root.save      
     end
     @folders = Folder.where("name <> 'All'")
+    @folders.sort! { |a,b| a.name.downcase <=> b.name.downcase }
   end
+  
+  def get_all_sorted_links
+    @links = Link.all
+    # revert to ABC sort--  @links.sort! { |a,b| a.title.downcase <=> b.title.downcase }
+    @links.sort! { |a,b| b.timestamp <=> a.timestamp }
+  end
+  
+  def sort_folders
+    @all = []
+    
+  end
+
 end

@@ -16,6 +16,8 @@
 
 
 <h2><%= link_to "Folders", root_path %></h2>
+<%= link_to "New Folder", new_folder_path %><br /><br />
+
 <%= link_to "All", root_path %>
 <% unless @folders.nil? %>
 	<% @folders.each do |folder| %>
