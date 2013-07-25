@@ -42,7 +42,11 @@ class LinksController < ApplicationController
   end
 
   def destroy
-  end
+    title = @link.title
+    @link.destroy
+    flash[:notice] = "Your link #{title} has been deleted."
+    redirect_to root_path
+  end  
   
   private
   
